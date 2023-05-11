@@ -51,11 +51,11 @@ class LinUCB:
 
             x = context.reshape((-1, 1))
             ucb = np.dot(theta_hat.T, x) + self.alpha * np.sqrt(np.dot(x.T, np.dot(A_inv, x)))
-            print('arm:', arm, 'est reward:', np.dot(theta_hat.T, x))
+            # print('arm:', arm, 'est reward:', np.dot(theta_hat.T, x))
             with open('log.txt', 'a') as f:
                 f.write('arm: ' + str(arm) + str(theta_hat) + '\n')
 
-            print(ucb)
+            # print(ucb)
             if ucb > max_ucb:
                 max_ucb = ucb
                 best_arm = arm

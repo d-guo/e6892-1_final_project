@@ -14,7 +14,7 @@ user_contexts = [
     [i, np.random.randint(0, 9), np.random.randint(0, 9), np.random.randint(0, 9), []] for i in range(10)
 ]
 
-linucb = LinUCB(user_contexts, 4, 50)
+linucb = LinUCB(user_contexts, 4, 5)
 epsilongreedy = EpsilonGreedy(0.1, len(user_contexts))
 
 rewards_linucb = []
@@ -28,6 +28,7 @@ for t in range(1000):
     arm_context = user_contexts[arm]
 
     reward = np.sum(create_context(user_context, arm_context))
+    reward = 1 if np.random.randint(1, 4) <= reward else 0
 
     arm1 = linucb.choose_arm(user_context)
     arm2 = epsilongreedy.choose_arm(user_context)
