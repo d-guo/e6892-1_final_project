@@ -1,7 +1,7 @@
 import numpy as np
 
 def create_context(user_context, arm_context):
-    age = np.abs(user_context[1] - arm_context[1]) <= 5
+    age = 1 if np.abs(user_context[1] - arm_context[1]) <= 5 else -1
     occupation = np.abs(user_context[2] - arm_context[2]) == 0
     location = np.abs(user_context[3] - arm_context[3]) <= 1
     friends_already = arm_context[0] in user_context[4]
@@ -51,7 +51,11 @@ class LinUCB:
 
             x = context.reshape((-1, 1))
             ucb = np.dot(theta_hat.T, x) + self.alpha * np.sqrt(np.dot(x.T, np.dot(A_inv, x)))
-            # print('arm:', arm, 'est reward:', np.dot(theta_hat.T, x))
+            print('arm:', arm, 'est reward:', np.dot(theta_hat.T, x))
+            with open('log.txt', 'a') as f:
+                f.write('arm: ' + str(arm) + str(theta_hat) + '\n')
+
+            print(ucb)
             if ucb > max_ucb:
                 max_ucb = ucb
                 best_arm = arm

@@ -2,21 +2,28 @@ import numpy as np
 
 from bandits import EpsilonGreedy, LinUCB
 
-p1 = ['player1', 25, 6, 6, []]
-p2 = ['player2', 25, 7, 8, []]
+p1 = ['player1', 0, 6, 6, []]
+p2 = ['player2', 50, 6, 6, []]
 
 user_contexts = [
-    [0, 25, 0, 6, []],
-    [1, 30, 0, 0, []],
-    [2, 50, 0, 6, []]
+    [0, 5, 0, 0, []],
+    [1, 55, 0, 0, []]
 ]
 
-bandit_alg = LinUCB(user_contexts, 4, 50)
+bandit_alg = LinUCB(user_contexts, 4, 500)
 
-print('type 0 to connect, 1 to decline')
+print('type 1 to connect, 0 to decline')
+print('-------------------------')
+print('players')
+print('p1 is', p1)
+print('p2 is', p2)
+print('-------------------------')
+print('rec options (arms)')
+for i in range(len(user_contexts)):
+    print(user_contexts[i])
 i = 0
 while True:
-    if i < 6:
+    if i < 4:
         player_context = p1
     else:
         player_context = p2
